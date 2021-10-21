@@ -1,0 +1,1 @@
+print("arslan ahmad bary muh bagiratinsan")
