@@ -40,6 +40,33 @@ summary(iris$Sepal.Length)
 sum(is.na(iris))
 
 
+install.packages("skimr")
+library(skimr)
+
+
+#Perform skim to display summary statistics.
+skim(iris)
+
+
+#Group data by species then perform skim
+iris
+  dplyr::group_by(Species)
+  skim()
+  
+  
+############################  
+# Quick Data Visualization
+# 
+# R base plot
+############################
+  
+#Panel Plots
+plot(iris)
+plot(iris, col = "red")
+
+#Scatter Plot
+plot(iris$Sepal.Width , iris$Sepal.Length)
+
 ```
 
 ## Including Plots
