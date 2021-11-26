@@ -17,8 +17,29 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 summary(cars)
-xy <- 12
-print(xy)
+library(datasets)
+data(iris)
+iris <- datasets::iris
+
+
+
+#View data
+View(iris)
+
+
+#head #tail
+head(iris,4)
+tail(iris,4)
+
+#SUMMARY
+summary(iris)
+summary(iris$Sepal.Length)
+
+
+#Check to see if there is some missing data?
+sum(is.na(iris))
+
+
 ```
 
 ## Including Plots
