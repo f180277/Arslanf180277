@@ -1,0 +1,47 @@
+---
+title: "DS-TASKS"
+author: "Arslan Ahmad"
+date: "12/11/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+install.packages("gtrendsR")
+library(gtrendsR)
+install.packages('ggplot2')
+library(ggplot2)
+data<-gtrends(keyword = 'Machine Learning',geo='',time='all',gprop = c("apps", "news", "pics", "Google", "Ms-edge"))
+count_data<-data$interest_by_country
+
+count_data<-na.omit(count_data)
+count_data<-head(count_data,10)
+count_data
+options(max.print=1000000)
+?barplot
+barplot(count_data$hits,xlab = 'Countries',ylab = 'Hits',names.arg = count_data$location,main="Google Trends of 'Machine Learning' in Countries",col='black',border='blue',las=2)
+?gtrends
+yearly_data<-data$interest_over_time
+yearly_data
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -1,0 +1,77 @@
+---
+title: "DS-TASKS"
+author: "Arslan Ahmad"
+date: "12/11/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+library("readxl")
+install.packages("tidyverse")
+library(tidyverse)
+data <- read.csv("C:\\Users\\Arslan Ahmad\\Downloads\\uber-raw-data-sep14.csv")
+data<-data.frame(data)
+first_date <- as.POSIXct(data[1,1], format = "%m/%d/%Y %H:%M:%S")
+first_date<-format(first_date, format="%m/%d/%Y")
+first_date<-as.Date(first_date,"%m/%d/%Y")
+options(max.print=1028136)
+print(nrow(data))
+my_dates<-c(rep(0,nrow(data)))
+week_days<-rep(0,nrow(data))
+days<-c("MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY")
+my_dates[1]<-1
+day<-strftime(first_date, "%A")
+for (i in 1:7)
+{
+  if(day==days[i])
+  {
+    week_days[1]<-(i-1)
+    break
+  }
+}
+print(week_days[1])
+for(i in 2:nrow(data))
+{
+  second_date <- as.POSIXct(data[i,1], format = "%m/%d/%Y %H:%M:%S")
+  second_date<-format(second_date, format="%m/%d/%Y")
+  second_date <- as.Date(second_date,"%m/%d/%Y")
+  a <- seq(from = first_date, to = second_date, by = 'day')
+  my_dates[i]<-length(a)
+  day<-strftime(second_date, "%A")
+  for (j in 1:7)
+  {
+    if(day==days[j])
+    {
+      week_days[i]<-(j-1)
+      break
+    }
+  }
+  
+  
+}
+my_dates
+data$days<-my_dates
+data$week_days<-week_days
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
